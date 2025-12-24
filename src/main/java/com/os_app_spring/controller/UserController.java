@@ -2,7 +2,7 @@ package com.os_app_spring.controller;
 
 import com.os_app_spring.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
-import com.os_app_spring.model.User;
+import com.os_app_spring.entity.User;
 
 import java.util.List;
 

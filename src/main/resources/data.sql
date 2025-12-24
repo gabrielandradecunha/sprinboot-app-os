@@ -45,6 +45,6 @@ create table if not exists os (
     id_cliente int not null,
     id_empresa int,
     constraint fk_os_cliente foreign key (id_cliente) references cliente(id) on delete cascade,
-    constraint fk_os_tecnico foreign key (id_tecnico) references "user"(id) on delete set null,
+    constraint fk_os_tecnico foreign key (id_tecnico) references users(id) on delete set null,
     constraint fk_os_empresa foreign key (id_empresa) references empresa(id) on delete set null
 );

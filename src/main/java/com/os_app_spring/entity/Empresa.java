@@ -1,24 +1,27 @@
-package com.os_app_spring.model;
+package com.os_app_spring.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "empresa")
+public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 120)
+    @Column(nullable = false, length = 150)
     private String nome;
 
-    @Column(length = 120)
-    private String email;
+    @Column(length = 18, unique = true)
+    private String cnpj;
 
     @Column(length = 20)
     private String telefone;
+
+    @Column(length = 120)
+    private String email;
 
     @Column(length = 255)
     private String endereco;
@@ -27,34 +30,34 @@ public class Cliente {
     private LocalDateTime dataCadastro;
 
     @ManyToOne
-    @JoinColumn(name = "id_empresa")
-    private Empresa empresa;
+    @JoinColumn(name = "id_user")
+    private User user;
 
-    public Cliente() {
+    public Empresa() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getTelefone() {
@@ -63,6 +66,14 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEndereco() {
@@ -81,11 +92,11 @@ public class Cliente {
         this.dataCadastro = dataCadastro;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
+    public User getUser() {
+        return user;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

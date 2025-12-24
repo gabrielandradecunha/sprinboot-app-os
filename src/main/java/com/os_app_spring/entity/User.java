@@ -1,4 +1,4 @@
-package com.os_app_spring.model;
+package com.os_app_spring.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

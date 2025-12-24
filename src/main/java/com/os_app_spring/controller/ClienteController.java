@@ -1,6 +1,6 @@
 package com.os_app_spring.controller;
 
-import com.os_app_spring.model.Cliente;
+import com.os_app_spring.entity.Cliente;
 import com.os_app_spring.repository.ClienteRepository;
 import org.springframework.web.bind.annotation.*;
 
