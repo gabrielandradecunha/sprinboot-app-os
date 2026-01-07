@@ -1,0 +1,60 @@
+/* Navbar fixa no topo */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #268700;
+  color: white;
+  padding: 12px 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  /* Tornar fixa no topo */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Espaçamento para o conteúdo não ficar atrás da navbar */
+body {
+  padding-top: 60px; /* Ajuste conforme a altura real da sua navbar */
+}
+
+.navbar-logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  background-color: #268700;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #b02a37;
+}

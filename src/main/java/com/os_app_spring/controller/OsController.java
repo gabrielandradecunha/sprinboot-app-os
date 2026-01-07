@@ -1,7 +1,12 @@
 package com.os_app_spring.controller;
 
+import com.os_app_spring.dto.OsListDTO;
 import com.os_app_spring.entity.Os;
+import com.os_app_spring.repository.ClienteRepository;
+import com.os_app_spring.repository.EmpresaRepository;
 import com.os_app_spring.repository.OsRepository;
+import com.os_app_spring.dto.OsDTO;
+import com.os_app_spring.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,47 +16,63 @@ import java.util.List;
 public class OsController {
 
     private final OsRepository osRepository;
+    private final ClienteRepository clienteRepository;
+    private final UserRepository userRepository;
+    private final EmpresaRepository empresaRepository;
 
-    public OsController(OsRepository osRepository) {
+    public OsController(
+            OsRepository osRepository,
+            ClienteRepository clienteRepository,
+            UserRepository userRepository,
+            EmpresaRepository empresaRepository
+    ) {
         this.osRepository = osRepository;
+        this.clienteRepository = clienteRepository;
+        this.userRepository = userRepository;
+        this.empresaRepository = empresaRepository;
     }
 
     @PostMapping
-    public Os create(@RequestBody Os os) {
-        os.setId(null);
-        return osRepository.save(os);
+    public OsDTO create(@RequestBody OsDTO dto) {
+
+        Os os = new Os();
+        os.setNome(dto.getNome());
+        os.setNumero(dto.getNumero());
+        os.setTipoProduto(dto.getTipo_produto());
+        os.setDefeito(dto.getDefeito());
+        os.setComplemento(dto.getComplemento());
+        os.setDescricao(dto.getDescricao());
+        os.setValor(dto.getValor());
+        os.setStatus(dto.getStatus());
+
+        os.setCliente(
+                clienteRepository.findById(dto.getId_cliente())
+                        .orElseThrow(() -> new RuntimeException("Cliente não encontrado"))
+        );
+
+        os.setTecnico(
+                userRepository.findById(dto.getId_tecnico())
+                        .orElseThrow(() -> new RuntimeException("Técnico não encontrado"))
+        );
+
+        if (dto.getId_empresa() != null) {
+            os.setEmpresa(
+                    empresaRepository.findById(dto.getId_empresa())
+                            .orElseThrow(() -> new RuntimeException("Empresa não encontrada"))
+            );
+        }
+
+        Os salva = osRepository.save(os);
+
+        return new OsDTO(salva);
     }
 
     @GetMapping
-    public List<Os> getAll() {
-        return osRepository.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Os getById(@PathVariable Long id) {
-        return osRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("OS não encontrada"));
-    }
-
-    @PutMapping("/{id}")
-    public Os update(@PathVariable Long id, @RequestBody Os os) {
-        Os existente = osRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("OS não encontrada"));
-
-        existente.setNumero(os.getNumero());
-        existente.setNome(os.getNome());
-        existente.setTipoProduto(os.getTipoProduto());
-        existente.setDefeito(os.getDefeito());
-        existente.setComplemento(os.getComplemento());
-        existente.setDataConclusao(os.getDataConclusao());
-        existente.setStatus(os.getStatus());
-        existente.setDescricao(os.getDescricao());
-        existente.setValor(os.getValor());
-        existente.setCliente(os.getCliente());
-        existente.setTecnico(os.getTecnico());
-        existente.setEmpresa(os.getEmpresa());
-
-        return osRepository.save(existente);
+    public List<OsListDTO> getAll() {
+        return osRepository.findAll()
+                .stream()
+                .map(OsListDTO::new)
+                .toList();
     }
 
     @DeleteMapping("/{id}")
@@ -61,4 +82,7 @@ public class OsController {
         }
         osRepository.deleteById(id);
     }
+
+
 }
+

@@ -1,0 +1,87 @@
+.os-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f6f8;
+  height: 100vh;
+}
+
+.os-form {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.os-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.os-form input,
+.os-form textarea,
+.os-form select {
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 100%;
+}
+
+.os-form textarea {
+  resize: vertical;
+}
+
+.os-form .checkbox {
+  display: flex;
+  font-size: 14px;
+}
+
+.os-form button {
+  padding: 12px;
+  background-color: #268700;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.os-form button:hover {
+  background-color: #268700;
+}
+
+.mensagem {
+  text-align: center;
+  margin-top: 10px;
+  color: #268700;
+  font-weight: 500;
+}
+
+.voltar {
+  color: #268700;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.os-form select {
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.os-form select option {
+  padding: 8px;
+}
+
+.os-form select + select {
+  margin-top: 8px;
+}
