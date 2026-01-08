@@ -9,6 +9,7 @@ App web para gerenciamento de Ordens de Serviço, desenvolvido com Spring Boot n
 - Spring Boot
 - Spring Web (API REST)
 - Spring Security + JWT
+- Spring Boot Test (JUnit 5)
 - Spring Data JPA (Hibernate)
 - PostgreSQL
 - Swagger / OpenAPI
