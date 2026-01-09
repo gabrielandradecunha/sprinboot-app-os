@@ -26,4 +26,19 @@ App web para gerenciamento de Ordens de Serviço, desenvolvido com Spring Boot n
 - Docker Compose
 
 ## Easy Setup
+Suba o banco de dados com docker-compose
+Execute o .jar
+```bash
+sudo docker-compose up -d
+```
+Execute a api em .jar
+```bash
+java -jar api_os_app.jar --server.port=8081
+```
+Rode o frontend
+```bash
+cd os_app/
+npm install
+npm run dev
+```
 
