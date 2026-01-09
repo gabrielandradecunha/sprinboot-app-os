@@ -7,7 +7,9 @@ import com.os_app_spring.repository.EmpresaRepository;
 import com.os_app_spring.repository.OsRepository;
 import com.os_app_spring.dto.OsDTO;
 import com.os_app_spring.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -76,12 +78,17 @@ public class OsController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         if (!osRepository.existsById(id)) {
-            throw new RuntimeException("OS não encontrada");
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "OS não encontrada"
+            );
         }
         osRepository.deleteById(id);
     }
+
 
 
 }

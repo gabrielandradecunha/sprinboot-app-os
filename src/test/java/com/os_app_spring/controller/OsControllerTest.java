@@ -89,7 +89,6 @@ class OsControllerTest {
         dto.setId_tecnico(2L);
         dto.setId_empresa(3L);
 
-        // Act + Assert
         mockMvc.perform(post("/os")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
@@ -99,32 +98,39 @@ class OsControllerTest {
 
     @Test
     void deveListarTodasAsOs() throws Exception {
+        Cliente cliente = new Cliente();
+        cliente.setId(1L);
+        cliente.setNome("Cliente Teste");
+
         Os os1 = new Os();
         os1.setId(1L);
         os1.setNome("OS 1");
+        os1.setCliente(cliente);
 
         Os os2 = new Os();
         os2.setId(2L);
         os2.setNome("OS 2");
+        os2.setCliente(cliente);
 
         Mockito.when(osRepository.findAll())
                 .thenReturn(List.of(os1, os2));
 
         mockMvc.perform(get("/os"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2));
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].cliente").value("Cliente Teste"));
+
     }
 
     @Test
     void deveExcluirUmaOs() throws Exception {
         Mockito.when(osRepository.existsById(1L))
                 .thenReturn(true);
-
         mockMvc.perform(delete("/os/1"))
-                .andExpect(status().isOk());
-
+                .andExpect(status().isNoContent());
         Mockito.verify(osRepository).deleteById(1L);
     }
+
 
     @Test
     void deveRetornarErroAoExcluirOsInexistente() throws Exception {
@@ -132,6 +138,6 @@ class OsControllerTest {
                 .thenReturn(false);
 
         mockMvc.perform(delete("/os/99"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isNotFound());
     }
 }

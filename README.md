@@ -24,3 +24,6 @@ App web para gerenciamento de Ordens de Serviço, desenvolvido com Spring Boot n
 ### Infraestrutura
 - Docker
 - Docker Compose
+
+## Easy Setup
+
