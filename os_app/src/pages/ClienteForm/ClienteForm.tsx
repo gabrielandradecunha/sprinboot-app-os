@@ -80,7 +80,7 @@ export default function ClienteForm(): React.ReactElement {
         headers: { Authorization: `Bearer ${token}` }
       })
 
-      setMensagem('✅ Cliente cadastrado com sucesso!')
+      setMensagem('Cliente cadastrado com sucesso!')
       setForm({
         nome: '',
         email: '',
@@ -95,7 +95,7 @@ export default function ClienteForm(): React.ReactElement {
 
       setClientes(response.data)
     } catch {
-      setMensagem('❌ Erro ao cadastrar cliente.')
+      setMensagem('Erro ao cadastrar cliente.')
     }
   }
 
