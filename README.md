@@ -26,6 +26,11 @@ App web para gerenciamento de Ordens de Serviço, desenvolvido com Spring Boot n
 - Docker Compose
 
 ## Easy Setup
+Clone o repositório
+```bash
+git clone https://github.com/gabrielandradecunha/sprinboot-app-os
+cd sprinboot-app-os/
+```
 Suba o banco de dados com docker-compose
 ```bash
 sudo docker-compose up -d
